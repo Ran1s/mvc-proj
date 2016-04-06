@@ -1,17 +1,12 @@
 class Controller:
-    def __init__(self, dialog):
+    def __init__(self, dialog, view):
         self.dialog = dialog
-
-    def set_view(self, view):
         self.view = view
-        self.view.print_question()
-        self.recognize_command(self.view.get_answer())
 
-    def recognize_command(self, command):
-        if self.view.is_answer(command):
-            self.dialog.to_next_question(command)
-            self.view.print_question()
-        else:
-            self.view.print_unkown_command(command)
+    def start(self):
+        self.view.set_current_question(self.dialog.current_question)
+        self.view.show()
 
-        self.recognize_command(self.view.get_answer())
+    def set_answer(self, answer):
+        if self.dialog.to_next_question(answer) is not False:
+            self.start()

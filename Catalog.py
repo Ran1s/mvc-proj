@@ -1,14 +1,13 @@
 class Answer:
-    def __init__(self, number, value, next_state):
+    def __init__(self, number, value, next_question):
         self.number = number
         self.value = value
-        self.next_state = next_state
+        self.next_question = next_question
 
 
 class Question:
-    def __init__(self, number, state, value, answers):
+    def __init__(self, number, value, answers):
         self.number = number
-        self.state = state
         self.value = value
         self.answers = answers
 
@@ -26,9 +25,9 @@ class Catalog:
     def delete_question(self, question):
         self.questions.remove(question)
 
-    def find_question_by_state(self, state):
+    def find_question_by_number(self, number):
         for question in self.questions:
-            if question.state == state:
+            if question.number == number:
                 return question
         return None
 
